@@ -2,13 +2,18 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
-  return <div className=' p-4 flex justify-center gap-8 text-sm capitalize mb-5'>
+  return <div className='fixed w-full z-10 p-4 bg-[#ff6106] font-semibold flex items-center justify-between gap-8 text-sm capitalize  px-30'>
+    <h1 className='font-semibold text-3xl'>Recipe-<span>hub</span></h1>
+      <div className='flex gap-7'>
+        
+          <NavLink style={{fontSize:"16px"}} className={(e)=> e.isActive ? "text-black": " "  } to='/' >home</NavLink>
+          <NavLink style={{fontSize:"16px"}} className={(e)=> e.isActive ? "text-black": " "  } to='/about' >about</NavLink>
+          <NavLink style={{fontSize:"16px",font:"bold"}} className={(e)=> e.isActive ? "text-black": " " } to='/recipe' >recipe</NavLink>
 
-    <NavLink className={(e)=> e.isActive ? "text-red-400": " "  } to='/' >home</NavLink>
-    <NavLink className={(e)=> e.isActive ? "text-red-400": " "  } to='/about' >about</NavLink>
-    <NavLink className={(e)=> e.isActive ? "text-red-400": " " } to='/recipe' >recipe</NavLink>
+          <NavLink style={{fontSize:"16px"}} className={(e)=> e.isActive ? "text-black": " "  } to='/create-recipe' >create</NavLink>
 
-    <NavLink className={(e)=> e.isActive ? "text-red-400": " "  } to='/create-recipe' >create</NavLink>
+          <NavLink style={{fontSize:"16px"}} className={(e)=> e.isActive ? "text-black": " "  } to='/fav' >Favroite</NavLink>
+      </div>
 
   </div>
 }

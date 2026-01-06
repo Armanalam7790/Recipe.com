@@ -4,7 +4,8 @@ import Navbar from './components/Navbar'
 
 const App = () => {
   return (
-    <div className='bg-gray-800 text-white font-thin w-screen h-screen py-10 px-[10%]'>
+    <div className='bg-gray-800 text-white font-thin w-screen min-h-screen '> 
+    {/* py-10 px-[10%] */}
       <Navbar />
       <Mainroutes />
     </div>

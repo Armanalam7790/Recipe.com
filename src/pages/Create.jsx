@@ -12,14 +12,17 @@ const {data,setdata}  = useContext(recipecontext)
 
  const submitHandler = (recipe)=>{
     recipe.id = nanoid()
-    // console.log(recipe);
-    setdata([...data,recipe])
+   const copydata = [...data]
+   copydata.push(recipe)
+    setdata(copydata)
+localStorage.setItem("recipes", JSON.stringify(copydata) )
+
     toast.success("New Recipe Add!")
   reset()
   navigate('/recipe')
  }
   return (
-    <div>
+    <div className='px-30 pt-20 absolute right-150  mt-30 border-2  pb-10 rounded-2xl  '>
         <form onSubmit={ handleSubmit(submitHandler)}>
             <input
             className='border-b outline-0 p-2 block'
@@ -50,7 +53,7 @@ const {data,setdata}  = useContext(recipecontext)
           <select
             className='border-b outline-0 p-2 block'
              {...register('category')}  >
-                <option value="break-fast">break</option>
+                <option value="break-fast">breakfast</option>
                 <option value="lunch">lunch</option>
                 <option value="dinner">dinner</option>
                 <option value="supper">supper</option>

@@ -8,7 +8,7 @@ const Recipe = () => {
    <RecipeCard key={recipe.id} recipe={recipe} />
   ));
 
-  return <div className="flex flex-wrap gap-5">{data.length > 0 ? randerecipe : "No recipe found:"}</div>;
+  return <div className="flex flex-wrap gap-6 px-20 pt-24">{data.length > 0 ? randerecipe : "No recipe found:"}</div>;
 };
 
 export default Recipe;

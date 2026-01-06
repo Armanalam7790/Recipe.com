@@ -8,7 +8,7 @@ const RecipeCard = (props) => {
 
     to={`/recipe/detail/${id}`}
 
-     className='block w-[23vw] rounded overflow-hidden shadow mr-3 mb-3 hover:scale-101 duration-150 '>
+     className='block w-[20vw] rounded overflow-hidden shadow mr-3 mb-3 hover:scale-101 duration-150 '>
         <img className='w-full h-[20vh] object-cover' src={image} alt="" />
         <h1 className='px-2 mt-3 font-black '>{title}</h1>
         <small className='px-2 text-red-500'>{chef}</small>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { recipecontext } from '../context/RecipeContext'
 import { useForm } from 'react-hook-form'
@@ -11,13 +11,13 @@ const {data,setdata}  = useContext(recipecontext)
  const recipe =  data.find(recipe => params.id == recipe.id)
 
  const {register,handleSubmit,reset}  =  useForm({defaultValues:{
-  title: recipe.title,
-  chef: recipe.chef,
-  image:recipe.image,
-  inst:recipe.inst,
-  desc:recipe.desc,
-  ingr:recipe.ingr,
-  category:recipe.category
+  title: recipe?.title,
+  chef: recipe?.chef,
+  image:recipe?.image,
+  inst:recipe?.inst,
+  desc:recipe?.desc,
+  ingr:recipe?.ingr,
+  category:recipe?.category
  }});
 
  const submitHandler = (recipe)=>{
@@ -27,6 +27,8 @@ const {data,setdata}  = useContext(recipecontext)
    const copydata  = [...data]
    copydata[index] = {...copydata[index], ...recipe}
    setdata(copydata)
+   localStorage.setItem("recipes", JSON.stringify(copydata) )
+
    toast.success('recipe updated')
    
 
@@ -41,11 +43,34 @@ const {data,setdata}  = useContext(recipecontext)
  const deletHandler = ()=>{
       const filterdata = data.filter(r => r.id != params.id)
       setdata(filterdata)
+      localStorage.setItem("recipes", JSON.stringify(filterdata) )
+
       toast.success('recipe deleted')
+      
       navigate('/recipe')
  }
 
-   useEffect(()=>{
+ 
+
+    // const favroite = JSON.parse(localStorage.getItem("fav")) || []
+const [favroite, setfavroite] = useState(
+  JSON.parse(localStorage.getItem("fav")) || []
+)
+    const FavHandler = ()=>{
+      const copyfav = [...favroite ]
+      copyfav.push(recipe)
+      favroite.push(recipe)
+      setfavroite(copyfav)
+      localStorage.setItem("fav", JSON.stringify(copyfav))
+    }
+
+     const UnFavHandler = ()=>{
+      const filterFav = favroite.filter(f=> f.id!= recipe?.id)
+      setfavroite(filterFav)
+           localStorage.setItem("fav", JSON.stringify(filterFav))
+    }
+
+  useEffect(()=>{
         console.log('singlerecipe.jsx mounred');
         // getproduct()
         return ()=>{
@@ -53,21 +78,33 @@ const {data,setdata}  = useContext(recipecontext)
           
         }
         
-    },[])
+    },[favroite])
+
+
+
+
+
+
 
   return (
-   recipe ? <div className='w-full flex'>
-    <div className=" w-1/2  left  p-2">
+   recipe ? <div className='w-full flex justify-center pt-24 '>
+    
+    <div className="relative  w-[98%]  left  p-10">
+    {favroite.find((f)=> f.id == recipe?.id)  ?( <i onClick={UnFavHandler} className="right-[5%]  absolute text-3xl text-red-400 ri-heart-fill"></i>) : (<i onClick={FavHandler} className="right-[5%]  absolute text-3xl text-red-400 ri-heart-line"></i>)
+ }
+
+    
+    
       <h1 className='text-5xl font-black'>{recipe.title}</h1>
       <img
-      className='w-[20vh]'
+      className='w-[50vh]'
       src={recipe.image} alt="" />
       <h1>{recipe.chef}</h1>
       <p>{recipe.desc}</p>
     </div>
 
      <form
-     className='w-1/2  right  p-2"'
+     className='w-[60%] right  p-2"'
      onSubmit={ handleSubmit(submitHandler)}>
             <input
             className='border-b outline-0 p-2 block'
