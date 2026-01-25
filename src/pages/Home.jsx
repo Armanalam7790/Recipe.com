@@ -27,7 +27,16 @@ const Home = () => {
         <h1 className=' text-8xl capitalize font-semibold'>testy food</h1>
         <h3 className=' text-6xl text-[#E34C25] capitalize font-semibold mt-4'>collection</h3>
        
-        <p className='text-sm capitalize font-semibold mt-3 px-50'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit tenetur fugit quibusdam et quia architecto modi. Aut quae ex ducimus id exercitationem! Harum, aperiam! Maiores soluta velit in voluptatum odit.</p>
+        <p className='text-md  italic capitalize font-semibold mt-3 px-50'>
+
+  Welcome to Recipe Haven
+
+Discover delicious, easy-to-cook recipes from around the world.
+From quick snacks to full meals, find the perfect recipe for every mood.
+
+ Fresh Recipes  Healthy Options  Sweet Treats
+
+ Start cooking today and turn every meal into a celebration!</p>
        </div>
        <div className="right w-[50%] h-full">
          <img className='h-full w-full object-center object-cover p-10' 
